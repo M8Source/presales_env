@@ -10,7 +10,7 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "13.0.5"
+    PostgrestVersion: "12.2.12 (cd3cf9e)"
   }
   public: {
     Tables: {
@@ -2629,8 +2629,8 @@ export type Database = {
     Functions: {
       get_aggregated_forecast_data: {
         Args: {
-          p_customer_id?: string
-          p_location_id?: string
+          p_customer_node_id?: string
+          p_location_node_id?: string
           p_product_id?: string
         }
         Returns: {
@@ -2640,162 +2640,16 @@ export type Database = {
           collaboration_status: string
           commercial_input: number
           commercial_notes: string
-          customer_id: string
+          customer_node_id: string
           demand_planner: number
           forecast: number
-          location_id: string
+          location_node_id: string
           postdate: string
           product_id: string
           sales_plan: number
           subcategory_id: string
           subcategory_name: string
         }[]
-      }
-      get_backorder_aging: {
-        Args: {
-          p_as_of_date?: string
-          p_customer_id?: string
-          p_location_id?: string
-          p_product_id?: string
-        }
-        Returns: {
-          age_bucket: string
-          orders_count: number
-          total_quantity: number
-        }[]
-      }
-      get_inventory_on_hand_latest: {
-        Args: {
-          p_customer_id?: string
-          p_location_id?: string
-          p_product_id?: string
-        }
-        Returns: {
-          latest_date: string
-          on_hand_units: number
-        }[]
-      }
-      get_inventory_timeseries: {
-        Args: {
-          p_customer_id?: string
-          p_end_date?: string
-          p_granularity?: string
-          p_location_id?: string
-          p_product_id?: string
-          p_start_date?: string
-        }
-        Returns: {
-          bucket_date: string
-          on_hand_units: number
-        }[]
-      }
-      get_locations_hierarchy: {
-        Args: { search_term?: string }
-        Returns: {
-          level_1: string
-          level_2: string
-          level_3: string
-          level_4: string
-          location_id: string
-          location_name: string
-        }[]
-      }
-      get_orders_detail: {
-        Args: {
-          p_customer_id?: string
-          p_end_date?: string
-          p_limit?: number
-          p_location_id?: string
-          p_order_type?: string
-          p_product_id?: string
-          p_start_date?: string
-        }
-        Returns: {
-          created_at: string
-          customer_id: string
-          expected_delivery_date: string
-          location_id: string
-          order_date: string
-          order_id: number
-          order_type: string
-          product_id: string
-          quantity: number
-          status: string
-          updated_at: string
-        }[]
-      }
-      get_orders_summary: {
-        Args: {
-          p_customer_id?: string
-          p_end_date?: string
-          p_location_id?: string
-          p_product_id?: string
-          p_start_date?: string
-        }
-        Returns: {
-          total_all_orders: number
-          total_back_orders: number
-          total_confirmed: number
-          total_landed_orders: number
-        }[]
-      }
-      get_orders_timeseries: {
-        Args: {
-          p_customer_id?: string
-          p_end_date?: string
-          p_granularity?: string
-          p_location_id?: string
-          p_product_id?: string
-          p_start_date?: string
-        }
-        Returns: {
-          bucket_date: string
-          order_type: string
-          total_quantity: number
-        }[]
-      }
-      get_products_hierarchy: {
-        Args: { search_term?: string }
-        Returns: {
-          category_id: string
-          category_name: string
-          class_id: string
-          class_name: string
-          product_id: string
-          product_name: string
-          subcategory_id: string
-          subcategory_name: string
-          subclass_id: string
-          subclass_name: string
-        }[]
-      }
-      get_supply_network_node_types: {
-        Args: Record<PropertyKey, never>
-        Returns: {
-          color_code: string
-          default_properties: Json
-          description: string
-          icon_name: string
-          id: string
-          type_code: string
-          type_name: string
-        }[]
-      }
-      get_supply_network_relationship_types: {
-        Args: Record<PropertyKey, never>
-        Returns: {
-          allows_multiple: boolean
-          default_properties: Json
-          description: string
-          id: string
-          is_directed: boolean
-          type_code: string
-          type_name: string
-        }[]
-      }
-      truncate_m8_schema: {
-        Args: Record<PropertyKey, never>
-        Returns: undefined
       }
     }
     Enums: {

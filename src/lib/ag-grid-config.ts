@@ -1,16 +1,18 @@
 import { GridOptions } from 'ag-grid-community';
+import { LicenseManager, ModuleRegistry, AllEnterpriseModule } from 'ag-grid-enterprise';
+import { myTheme } from './m8-grid-theme.js';
 
 // Common AG Grid configuration
 export const commonAgGridConfig: Partial<GridOptions> = {
   defaultColDef: {
     sortable: true,
-    filter: true,
+    filter: false,
     resizable: true
   },
   animateRows: true,
   headerHeight: 40,
   rowHeight: 30,
-  
+  theme: myTheme,
   pagination: true,
   paginationPageSize: 10,
   paginationPageSizeSelector: [5, 10, 20, 50],
@@ -37,9 +39,15 @@ export const pivotTableConfig: Partial<GridOptions> = {
   }
 };
 
-// Configure AG Grid - Community version only
-export const configureAGGrid = () => {
-  // Community version doesn't require license configuration
+// Configure AG Grid Enterprise License and Modules
+// Replace with your actual license key
+export const configureAGGridLicense = () => {
+  // Register all enterprise modules
+  ModuleRegistry.registerModules([AllEnterpriseModule]);
+  
+  // You can set your license key here or via environment variable
+  const licenseKey = 'DownloadDevTools_COM_NDEwMjM0NTgwMDAwMA==59158b5225400879a12a96634544f5b6';
+  LicenseManager.setLicenseKey(licenseKey);
 };
 
 // Default grid options that match the application theme
@@ -87,13 +95,22 @@ export const defaultGridOptions = {
 
   defaultColDef: {
     sortable: true,
-    filter: true,
+    filter: false,
     resizable: true,
     floatingFilter: false,
-    suppressMenu: false,
+    suppressMenu: true,
   },
   onCellFocused: (params: any) => {
     params.api.refreshCells({ force: true });
+  },
+  statusBar: {
+    statusPanels: [
+      { statusPanel: 'agTotalRowCountComponent', align: 'left' },
+      { statusPanel: 'agFilteredRowCountComponent', align: 'left' },
+      { statusPanel: 'agSelectedRowCountComponent', align: 'left' },
+      { statusPanel: 'rangeSumStatusPanel', align: 'right' },
+      { statusPanel: 'agAggregationComponent', align: 'right' }
+    ]
   }
 };
 

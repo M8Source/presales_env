@@ -1,15 +1,29 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
-import { componentTagger } from "lovable-tagger";
+
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
-    host: "::",
-    port: 8085,
+    host: "0.0.0.0",
+    port: 8080,
+    allowedHosts: [
+      "demoenv.m8solutions.platform.com",
+      "localhost",
+      "127.0.0.1"
+    ]
   },
-  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+  proxy: {
+    '/api': {
+      target: 'https://analytics.m8solutions.com.mx/',
+      changeOrigin: true,
+      secure: false,
+    },
+  },
+  plugins: [
+    react(),
+  ].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

@@ -40,3 +40,17 @@
 .read-the-docs {
   color: #888;
 }
+
+/* In your global CSS (e.g., index.css or App.css) */
+.handsontable-series-cell {
+  background-color: #7dd3fc; /* Tailwind's bg-sky-300 */
+  font-weight: 500;
+}
+
+.handsontable-alt-row {
+  background-color: #aaaaaa;
+}
+
+.handsontable-row-even {
+  background-color: #9c9c9c;
+}
