@@ -122,12 +122,8 @@ export function ForecastDataTable({
 
     // Filtro de ubicación si hay código y podemos resolver el node_id
     if (selectedLocationId) {
-      const locNodeId = getLocationNodeIdFromCode(selectedLocationId);
-      if (locNodeId) {
-        query = query.eq('location_node_id', locNodeId);
-      } else {
-        console.warn('Location node_id not found for code:', selectedLocationId);
-      }
+        query = query.eq('location_code', selectedLocationId);
+        console.log('Filtering by location_code:', selectedLocationId);
     }
 
   
